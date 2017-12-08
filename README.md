@@ -30,4 +30,4 @@ This is a good [conversation](https://groups.google.com/forum/#!topic/cloud-spee
 Quite naturally, I also used python wrappers for both ffmpeg and sox called [ffmpy](https://pypi.python.org/pypi/ffmpy) and [pysox](https://github.com/rabitt/pysox) respectively. Both are listed as requirements in the requirements.txt file.
 
 
-Web resources and JS scripts to record sound blob was shamelessly taken from the [mdn/web-dictaphone](https://github.com/mdn/web-dictaphone).
+Web resources and JS scripts to record sound blob were shamelessly taken from the [mdn/web-dictaphone](https://github.com/mdn/web-dictaphone).
