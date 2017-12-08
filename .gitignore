@@ -1,6 +1,6 @@
 __pycache__/*
 cloud-client/resources/
-venv/*
+env/*
 .Python
 bin
 lib

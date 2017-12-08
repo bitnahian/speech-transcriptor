@@ -80,7 +80,7 @@ def transcribe():
             response = client.recognize(config, audio)
             rsp = ''
             for result in response.results:
-                rsp += 'Transcript: {}'.format(result.alternatives[0].transcript))
+                rsp += 'Transcript: {}'.format(result.alternatives[0].transcript)
             # [END speech_quickstart]
             return jsonify({"output" : rsp})
 
