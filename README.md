@@ -1,5 +1,7 @@
 # speech-transcriptor 
-Speech to Transcript script using Google Speech API. The following description is copied from the python-doc module for the Google Speech API. 
+Simple Flask application that takes in audio recordings and outputs the transcripts of those audios to the user using the Google Speech API.
+
+The following description is copied from the python-doc module for the Google Speech API. 
 
 # Authentication
 
