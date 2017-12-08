@@ -20,7 +20,7 @@ var canvasCtx = canvas.getContext("2d");
 if (navigator.mediaDevices.getUserMedia) {
   console.log('getUserMedia supported.');
 
-  var constraints = { audio: true };
+  var constraints = { audio: true, video: false };
   var chunks = [];
 
   var onSuccess = function(stream) {
@@ -77,14 +77,14 @@ if (navigator.mediaDevices.getUserMedia) {
       soundClips.appendChild(clipContainer);
 
       audio.controls = true;
-      var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
+      var blob = new Blob(chunks, { 'type' : 'audio/wav; codecs=opus' });
       chunks = [];
       var audioURL = window.URL.createObjectURL(blob);
       audio.src = audioURL;
       console.log("recorder stopped");
       // Perform ajax call to /transcribe in order to call Google API
       var form = new FormData();
-      form.append('file', blob, "audio.ogg");
+      form.append('file', blob, "audio.wav");
       $.ajax({
         type: 'POST',
         url: '/transcribe',
@@ -114,6 +114,7 @@ if (navigator.mediaDevices.getUserMedia) {
 
     mediaRecorder.ondataavailable = function(e) {
       chunks.push(e.data);
+      getBlobDetails(e.data);
     }
 
   }
@@ -186,3 +187,23 @@ window.onresize = function() {
 }
 
 window.onresize();
+
+
+function getBlobDetails(blob, callback){
+    var audioURL = window.URL.createObjectURL(blob);
+    var audio = new Audio(audioURL);window.aud = audio;
+    audio.onloadedmetadata = function(){
+        var source = audioCtx.createMediaElementSource(audio);
+        console.log('Duration: '+ audio.duration + ' seconds');
+        console.log('Channel Count: '+ source.channelCount);
+        console.log('Sample Rate: '+ source.context.sampleRate + ' Hz');
+        if(!callback){
+            return;
+        }
+        callback({
+            duration: audio.duration,
+            channelCount: source.channelCount,
+            sampleRate: source.context.sampleRate
+        });
+    };
+}
